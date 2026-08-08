@@ -3,12 +3,194 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./src/css/style.css" />
     <title>Document</title>
   </head>
   <body>
-    <header>
-      <div class="headerTitle"></div>
-    </header>
+    <div class="court-lines" aria-hidden="true">
+      <!-- prettier-ignore -->
+      <svg viewBox="0 0 300 700" preserveAspectRatio="none">
+      <rect x="20" y="20" width="260" height="660" fill="none" stroke="#F5F7F2" stroke-opacity="0.06" stroke-width="1.5"/>
+      <line x1="55" y1="20" x2="55" y2="680" stroke="#F5F7F2" stroke-opacity="0.06" stroke-width="1.5"/>
+      <line x1="245" y1="20" x2="245" y2="680" stroke="#F5F7F2" stroke-opacity="0.06" stroke-width="1.5"/>
+      <line x1="20" y1="350" x2="280" y2="350" stroke="#F5F7F2" stroke-opacity="0.06" stroke-width="1.5"/>
+      <line x1="55" y1="180" x2="245" y2="180" stroke="#F5F7F2" stroke-opacity="0.06" stroke-width="1.5"/>
+      <line x1="55" y1="520" x2="245" y2="520" stroke="#F5F7F2" stroke-opacity="0.06" stroke-width="1.5"/>
+      <line x1="150" y1="180" x2="150" y2="350" stroke="#F5F7F2" stroke-opacity="0.06" stroke-width="1.5"/>
+      <line x1="150" y1="350" x2="150" y2="520" stroke="#F5F7F2" stroke-opacity="0.06" stroke-width="1.5"/>
+      <line x1="145" y1="20" x2="155" y2="20" stroke="#F5F7F2" stroke-opacity="0.1" stroke-width="1.5"/>
+      <line x1="145" y1="680" x2="155" y2="680" stroke="#F5F7F2" stroke-opacity="0.1" stroke-width="1.5"/>
+    </svg>
+    </div>
+
+    <div class="app">
+      <!-- ========= HOME SCREEN ==========-->
+      <section id="homeScreen" class="screen active">
+        <header class="homeHeader">
+          <div class="wordmark">
+            <span class="ball-dot" aria-hidden="true"></span>
+            <span>Ace</span>
+          </div>
+          <button class="btnIcon" id="btnHistory" aria-label="Match History">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="9"></circle>
+              <polyline points="12 7 12 12 15 15"></polyline>
+            </svg>
+          </button>
+        </header>
+
+        <div class="homeBody">
+          <button class="btnPrimary" id="btnNewMatch">New Match</button>
+          <p class="statLine" id="stat-line">No matches yet</p>
+        </div>
+      </section>
+
+      <!-- ========= SETUP SCREEN ========= -->
+      <section id="setupScreen" class="screen">
+        <header class="subHeader">
+          <button class="btnIcon" id="btnSetupBack" aria-label="Back to home">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+          </button>
+          <h1 class="screenTitle">New match</h1>
+        </header>
+
+        <form class="setupForm" id="setup-form">
+          <div class="field">
+            <label for="teamA">Team A</label>
+            <input
+              type="text"
+              id="teamA"
+              name="Team A"
+              placeholder="Enter name"
+              autocomplete="off"
+              required
+            />
+          </div>
+
+          <div class="field">
+            <label for="teamB">Team B</label>
+            <input
+              type="text"
+              id="teamB"
+              name="Team B"
+              placeholder="Enter name"
+              autocomplete="off"
+              required
+            />
+          </div>
+
+          <div class="field">
+            <span class="fieldLabel">Sets per match</span>
+            <div class="stepper" id="setsStepper">
+              <button
+                type="button"
+                class="stepperBtn stepperMinus"
+                id="setsMinus"
+                aria-label="Decrease sets per match"
+              >
+                -
+              </button>
+              <span class="stepperValue" id="setsValue">2</span>
+              <button
+                type="button"
+                class="stepperBtn stepperPlus"
+                id="setsPlus"
+                aria-label="Increase sets per match"
+              >
+                +
+              </button>
+            </div>
+          </div>
+
+          <div class="field">
+            <span class="fieldLabel">Games per set</span>
+            <div class="stepper" id="gamesStepper">
+              <button
+                type="button"
+                class="stepperBtn stepperMinus"
+                id="gamesMinus"
+                aria-label="Decrease games per set"
+              >
+                -
+              </button>
+              <span class="stepperValue" id="gamesValue">6</span>
+              <button
+                type="button"
+                class="stepperBtn stepperPlus"
+                id="gamesPlus"
+                aria-label="Increase games per set"
+              >
+                +
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" class="btnPrimary" id="btnStartMatch">
+            Start Match
+          </button>
+        </form>
+      </section>
+
+      <!-- ========= LIVE SCOREBOARD SCREEN ========= -->
+      <section id="liveScreen" class="screen">
+        <div class="liveStatus" id="live-status">Set 0-0 · Game 0-0</div>
+        <button class="scoreZone scoreZoneA" id="zoneA" aria-label="Point for Team A">
+          <span class="serveDot" id="serveDotA" aria-hidden="true"></span>
+          <span class="teamName" id="nameA">Team A</span>
+          <span class="pointValue" id="pointA">0</span>
+
+          <div class="netLine" aria-hidden="true"></div>
+
+          <button class="scoreZone scoreZoneB" id="zoneB" aria-label="Point for Team B">
+          <span class="serveDot" id="serveDotB" aria-hidden="true"></span>
+          <span class="teamName" id="nameB">Team B</span>
+          <span class="pointValue" id="pointB">0</span>
+        </button>
+
+        <div class="liveControls">
+          <button class="btnGhost" id="btnUndo">Undo</button>
+          <button class="btnGhost" id="btnReset">Reset Match</button>
+        </div>
+      </section>
+
+      <!-- ========= HISTORY SCREEN ========= -->
+       <section id="historyScreen" class="screen">
+        <header class="subHeader">
+          <button class="btnIcon" id="btnHistoryBack" aria-label="Back to home">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+          </button>
+          <h1 class="screenTitle">Match History</h1>
+        </header>
+
+        <ul class="historyList" id="history-list">
+          <li class="emptyState" id="historyEmpty">
+            <p>No matches yet.</p>
+            <button class="btnPrimary btnSmall" id="btnEmptyNewMatch">New Match</button>
+          </li>
+        </ul>
+       </section>
+    </div>
+
     <script type="module" src="./src/script.js"></script>
   </body>
 </html>
