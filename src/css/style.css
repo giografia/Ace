@@ -1,1 +1,150 @@
 @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Inter:wght@400;500;600&display=swap");
+
+:root {
+  --bg: #0f2a3d;
+  --surface: #16374b;
+  --surface-alt: #1c3f56;
+  --text: #f5f7f2;
+  --text-muted: #9fb3c0;
+  --accent: #d9f02b;
+  --accent-text: #0f2a3d;
+  --success-bg: rgba(217, 240, 43, 0.12);
+  --radius: 10px;
+  --radius-lg: 16px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  font-family: "Inter", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-tap-highlight-color: transparent;
+}
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: inherit;
+}
+input {
+  font-family: inherit;
+}
+svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ========= BACKGROUND COURT LINES ========= */
+.courtLines {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+.courtLines svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ========= APP ========= */
+.app {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.screen {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+  padding: var(--space-5) var(--space-4);
+}
+.screen.active {
+  display: flex;
+}
+#liveScreen.active {
+  padding: 0;
+}
+
+/* ========= HEADERS ========= */
+.homeHeader,
+.subHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+.homeHeader {
+  justify-content: space-between;
+}
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: "Oswald", sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.ballDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: inline-block;
+}
+.screenTitle {
+  font-size: 16px;
+  font-weight: 500;
+}
+.btnIcon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--text-muted);
+}
+.btnIcon:hover {
+  background: var(--surface);
+  color: var(--text);
+}
+.btnIcon:focus-visible,
+input:focus-visible,
+.stepperBtn:focus-visible,
+.btnPrimary:focus-visible,
+.btnGhost:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ========= HOME SCREEN ========= */
+.homeBody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-3);
+}
+.statLine {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+}
