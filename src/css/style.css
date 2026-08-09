@@ -52,6 +52,10 @@ svg {
   width: 20px;
   height: 20px;
 }
+#btnHistory svg {
+  width: 40px;
+  height: 40px;
+}
 
 /* BACKGROUND COURT LINES */
 .courtLines {
@@ -103,13 +107,13 @@ svg {
   align-items: center;
   gap: var(--space-2);
   font-family: "Oswald", sans-serif;
-  font-size: 20px;
+  font-size: 40px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 .ballDot {
-  width: 10px;
-  height: 10px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: var(--accent);
   display: inline-block;
@@ -256,11 +260,12 @@ input[type="text"]:focus {
   border-radius: var(--radius);
   padding: 16px 0;
   font-family: "Oswald", sans-serif;
-  font-size: 15px;
+  font-size: 25px;
   letter-spacing: 0.03em;
   text-transform: uppercase;
   text-align: center;
   transition: transform 0.1s ease;
+  margin: 15px;
 }
 .btnPrimary:hover {
   background: var(--accent-dark);
@@ -292,7 +297,7 @@ input[type="text"]:focus {
 /* LIVE SCOREBOARD */
 .liveStatus {
   text-align: center;
-  font-size: 11px;
+  font-size: 18px;
   color: var(--text-muted);
   padding: var(--space-3) 0;
   border-bottom: 1px solid var(--surface-alt);
@@ -316,6 +321,17 @@ input[type="text"]:focus {
 .scoreZone.is-serving {
   background: var(--success-bg);
 }
+.deucePoints {
+  display: flex;
+  padding: 5px;
+}
+.deucePoint {
+  border: 1px solid greenyellow;
+  width: 10vw;
+  height: 10vw;
+  display: flex;
+  margin: 20px;
+}
 .serveDot {
   position: absolute;
   top: var(--space-4);
@@ -330,7 +346,7 @@ input[type="text"]:focus {
   opacity: 1;
 }
 .teamName {
-  font-size: 13px;
+  font-size: 25px;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.04em;
