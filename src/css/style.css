@@ -1,13 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@500;600&family=Inter:wght@400;500;600&display=swap");
 
 :root {
-  --bg: #0f2a3d;
+  /* --bg: #0f2a3d; */
+  --bg: #a94b32;
   --surface: #16374b;
   --surface-alt: #1c3f56;
   --text: #f5f7f2;
   --text-muted: #9fb3c0;
   --accent: #d9f02b;
+  --accent-dark: #b8cc1f;
   --accent-text: #0f2a3d;
+  --btnMinus: #e5484d;
+  --btnMinus-dark: #c23d41;
   --success-bg: rgba(217, 240, 43, 0.12);
   --radius: 10px;
   --radius-lg: 16px;
@@ -49,9 +53,9 @@ svg {
   height: 20px;
 }
 
-/* ========= BACKGROUND COURT LINES ========= */
+/* BACKGROUND COURT LINES */
 .courtLines {
-  position: fixed;
+  position: absolute;
   inset: 0;
   z-index: -1;
   pointer-events: none;
@@ -61,8 +65,9 @@ svg {
   height: 100%;
 }
 
-/* ========= APP ========= */
+/* APP */
 .app {
+  position: relative;
   max-width: 480px;
   margin: 0 auto;
   min-height: 100vh;
@@ -73,7 +78,7 @@ svg {
   display: none;
   flex: 1;
   flex-direction: column;
-  padding: var(--space-5) var(--space-4);
+  padding: var(--space-5) var(--space-6);
 }
 .screen.active {
   display: flex;
@@ -82,7 +87,7 @@ svg {
   padding: 0;
 }
 
-/* ========= HEADERS ========= */
+/* HEADERS */
 .homeHeader,
 .subHeader {
   display: flex;
@@ -135,16 +140,283 @@ input:focus-visible,
   outline-offset: 2px;
 }
 
-/* ========= HOME SCREEN ========= */
+/* HOME SCREEN */
 .homeBody {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   gap: var(--space-3);
+  padding-bottom: 200px;
 }
 .statLine {
   text-align: center;
-  font-size: 12px;
+  font-size: 23px;
   color: var(--text-muted);
+}
+
+/* FORM FIELDS */
+.setupForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  flex: 1;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.field label,
+.fieldLabel {
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+input[type="text"] {
+  appearance: none;
+  background: var(--surface-alt);
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  font-size: 14px;
+  color: var(--text);
+  min-height: 48px;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+input[type="text"]::placeholder {
+  color: var(--text-muted);
+}
+input[type="text"]:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(217, 240, 43, 0.25);
+  outline: none;
+}
+
+/* STEPPER CONTROLS */
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface-alt);
+  border-radius: var(--radius);
+  padding: var(--space-2) var(--space-3);
+}
+.stepperBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  line-height: 1;
+  background: var(--surface);
+  color: var(--text);
+  transition:
+    background 0.15s ease,
+    transform 0.1s ease;
+}
+.stepperBtn:hover {
+  background: var(--accent-dark);
+}
+.stepperBtn:active {
+  transform: scale(0.92);
+}
+.stepperPlus {
+  background: var(--accent);
+  color: var(--accent-text);
+  font-weight: 700;
+}
+.stepperMinus {
+  background: var(--btnMinus);
+}
+.stepperMinus:hover {
+  background: var(--btnMinus-dark);
+}
+.stepperBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.stepperValue {
+  font-family: "Oswald", sans-serif;
+  font-size: 20px;
+  color: var(--text);
+  min-width: 24px;
+  text-align: center;
+}
+
+/* BUTTONS */
+.btnPrimary {
+  background: var(--accent);
+  color: var(--accent-text);
+  border-radius: var(--radius);
+  padding: 16px 0;
+  font-family: "Oswald", sans-serif;
+  font-size: 15px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-align: center;
+  transition: transform 0.1s ease;
+}
+.btnPrimary:hover {
+  background: var(--accent-dark);
+}
+.btnPrimary:active {
+  transform: scale(0.98);
+}
+.btnSmall {
+  padding: 10px 20px;
+  font-size: 12px;
+  display: inline-block;
+}
+.btnGhost {
+  background: var(--surface);
+  color: var(--text-muted);
+  border-radius: var(--radius);
+  padding: 12px 0;
+  font-size: 13px;
+  flex: 1;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+.btnGhost:hover {
+  background: var(--surface-alt);
+  color: var(--text);
+}
+
+/* LIVE SCOREBOARD */
+.liveStatus {
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-muted);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--surface-alt);
+}
+.scoreZone {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  position: relative;
+  background: transparent;
+  transition: background 0.15s ease;
+  min-height: 30vh;
+}
+.scoreZone:active {
+  background: rgba(22, 55, 75, 0.6);
+}
+.scoreZone.is-serving {
+  background: var(--success-bg);
+}
+.serveDot {
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-4);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0;
+}
+.scoreZone.is-serving .serveDot {
+  opacity: 1;
+}
+.teamName {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.pointValue {
+  font-family: "Oswald", sans-serif;
+  font-size: 72px;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.netLine {
+  height: 1px;
+  background: repeating-linear-gradient(
+    to right,
+    var(--text-muted) 0,
+    var(--text-muted) 6px,
+    transparent 6px,
+    transparent 12px
+  );
+  opacity: 0.4;
+}
+.liveControls {
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background: transparent;
+}
+
+/* HISTORY */
+.historyList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.historyCard {
+  background: var(--surface-alt);
+  border-radius: var(--radius);
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.historyNames {
+  font-size: 13px;
+  margin-bottom: 3px;
+}
+.historyMeta {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.historyScore {
+  font-family: "Oswald", sans-serif;
+  font-size: 18px;
+  color: var(--accent);
+}
+.emptyState {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  padding: var(--space-6) 0;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* RESPONSIVE */
+@media (min-width: 480px) {
+  body {
+    background: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  .app {
+    width: 400px;
+    height: 875px;
+    max-height: 92vh;
+    min-height: unset;
+    border-radius: 32px;
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(245, 247, 242, 0.08);
+  }
 }
