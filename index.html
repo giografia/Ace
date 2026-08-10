@@ -7,10 +7,9 @@
     <title>Document</title>
   </head>
   <body>
-
     <div class="app">
       <!-- COURT LINES -->
-       <div class="courtLines" aria-hidden="true">
+      <div class="courtLines" aria-hidden="true">
         <!-- prettier-ignore -->
         <svg viewBox="0 0 300 700" preserveAspectRatio="none">
         <rect x="20" y="20" width="260" height="660" fill="none" stroke="#F5F7F2" stroke-opacity="0.16" stroke-width="1.5"/>
@@ -24,7 +23,7 @@
         <line x1="145" y1="20" x2="155" y2="20" stroke="#F5F7F2" stroke-opacity="0.16" stroke-width="1.5"/>
         <line x1="145" y1="680" x2="155" y2="680" stroke="#F5F7F2" stroke-opacity="0.16" stroke-width="1.5"/>
       </svg>
-    </div>
+      </div>
 
       <!--  HOME SCREEN -->
       <section id="homeScreen" class="screen active">
@@ -54,7 +53,7 @@
         </div>
       </section>
 
-       <!-- SETUP SCREEN  -->
+      <!-- SETUP SCREEN  -->
       <section id="setupScreen" class="screen">
         <header class="subHeader">
           <button class="btnIcon" id="btnSetupBack" aria-label="Back to home">
@@ -153,7 +152,14 @@
       <!--  LIVE SCOREBOARD SCREEN  -->
       <section id="liveScreen" class="screen">
         <div class="liveStatus" id="live-status">Set 0-0 · Game 0-0</div>
-        <button class="scoreZone scoreZoneA" id="zoneA" aria-label="Point for Team A">
+
+        <div class="winMessage" id="winMessage"></div>
+
+        <button
+          class="scoreZone scoreZoneA"
+          id="zoneA"
+          aria-label="Point for Team A"
+        >
           <span class="serveDot" id="serveDotA" aria-hidden="true"></span>
           <span class="teamName" id="nameA">Team A</span>
           <span class="pointValue" id="pointA">0</span>
@@ -163,10 +169,13 @@
               <div class="deucePoint pointA2"></div>
             </div>
           </div>
+        </button>
 
-          <div class="netLine" aria-hidden="true"></div>
-
-          <button class="scoreZone scoreZoneB" id="zoneB" aria-label="Point for Team B">
+        <button
+          class="scoreZone scoreZoneB"
+          id="zoneB"
+          aria-label="Point for Team B"
+        >
           <span class="serveDot" id="serveDotB" aria-hidden="true"></span>
           <span class="teamName" id="nameB">Team B</span>
           <span class="pointValue" id="pointB">0</span>
@@ -180,15 +189,21 @@
 
         <div class="liveControls">
           <button class="btnGhost" id="btnUndo">Undo</button>
-          <button class="btnGhost" id="btnReset">Reset Match</button>
+          <button class="btnGhost" id="btnNew">New Match</button>
         </div>
       </section>
-
       <!--  HISTORY SCREEN  -->
-       <section id="historyScreen" class="screen">
+      <section id="historyScreen" class="screen">
         <header class="subHeader">
           <button class="btnIcon" id="btnHistoryBack" aria-label="Back to home">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
               <line x1="19" y1="12" x2="5" y2="12"></line>
               <polyline points="12 19 5 12 12 5"></polyline>
             </svg>
@@ -208,10 +223,12 @@
           -->
           <li class="emptyState" id="historyEmpty">
             <p>No matches yet.</p>
-            <button class="btnPrimary btnSmall" id="btnEmptyNewMatch">New Match</button>
+            <button class="btnPrimary btnSmall" id="btnEmptyNewMatch">
+              New Match
+            </button>
           </li>
         </ul>
-       </section>
+      </section>
     </div>
 
     <script type="module" src="./src/script.js"></script>
