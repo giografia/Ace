@@ -294,13 +294,17 @@ input[type="text"]:focus {
   background: var(--surface-alt);
   color: var(--text);
 }
+.btnGhost:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
 
 /* LIVE SCOREBOARD */
 .liveStatus {
   text-align: center;
   font-size: 18px;
   color: var(--text-muted);
-  padding: var(--space-5) 0;
+  padding: var(--space-3) 0;
 }
 .scoreZone {
   flex: 1;
@@ -314,10 +318,6 @@ input[type="text"]:focus {
   background: transparent;
   transition: background 0.15s ease;
   min-height: 30vh;
-}
-.scoreZoneA {
-  display: flex;
-  flex-direction: column-reverse;
 }
 .scoreZone:active {
   background: rgba(22, 55, 75, 0.6);

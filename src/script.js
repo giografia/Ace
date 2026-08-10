@@ -40,7 +40,6 @@ document.getElementById("gamesMinus").addEventListener("click", () => {
   gamesValueEl.textContent = gamesPerSet;
 });
 
-// team names, filled in once the match starts
 let teamAName = "Team A";
 let teamBName = "Team B";
 
@@ -58,7 +57,7 @@ document.getElementById("btnStartMatch").addEventListener("click", (e) => {
     teamNameA.textContent = teamAName;
     teamNameB.textContent = teamBName;
 
-    updateStatus();
+    resetMatch();
     switchScreens("liveScreen");
   } else {
     alert("Please fill every form");
@@ -75,6 +74,9 @@ let gamesB = 0;
 let setsA = 0;
 let setsB = 0;
 let matchOver = false;
+
+let history = [];
+let pendingResetTimeout = null;
 
 const pointAEl = document.getElementById("pointA");
 const pointBEl = document.getElementById("pointB");
@@ -111,19 +113,37 @@ const showWinMessage = function (text, zoneEl) {
   zoneEl.classList.add("zoneWinner");
 };
 
+const btnUndoEl = document.getElementById("btnUndo");
+
+const updateUndoState = function () {
+  btnUndoEl.disabled = history.length === 0;
+};
+
 const scorePoint = function (team) {
   if (matchOver) return;
+
+  history.push({
+    scoreAIdx,
+    scoreBIdx,
+    advantage,
+    gamesA,
+    gamesB,
+    setsA,
+    setsB,
+    matchOver,
+  });
+  updateUndoState();
 
   const atDeuce = scoreAIdx === 3 && scoreBIdx === 3;
 
   if (atDeuce || advantage) {
     if (advantage === team) {
-      return winGame(team, true); // scored the advantage point -> wins game
+      return winGame(team, true);
     } else if (advantage) {
-      advantage = null; // opponent cancels the ad, back to deuce
+      advantage = null;
       updateDisplay();
     } else {
-      advantage = team; // plain deuce -> this player takes the ad
+      advantage = team;
       updateDisplay();
     }
     return;
@@ -131,7 +151,6 @@ const scorePoint = function (team) {
 
   if (team === "A") {
     if (scoreAIdx === 3) {
-      // already at 40 (and opponent isn't, since atDeuce was false) -> wins game
       return winGame("A", false);
     }
     scoreAIdx++;
@@ -178,7 +197,10 @@ const winGame = function (team, wasAdPoint) {
   showWinMessage(message, zoneEl);
 
   if (!matchOver) {
-    setTimeout(resetGame, 1500);
+    pendingResetTimeout = setTimeout(() => {
+      pendingResetTimeout = null;
+      resetGame();
+    }, 1500);
   }
 };
 
@@ -194,6 +216,58 @@ const resetGame = function () {
   winMessageEl.classList.remove("visible");
   updateDisplay();
 };
+
+const resetMatch = function () {
+  if (pendingResetTimeout) {
+    clearTimeout(pendingResetTimeout);
+    pendingResetTimeout = null;
+  }
+  gamesA = 0;
+  gamesB = 0;
+  setsA = 0;
+  setsB = 0;
+  matchOver = false;
+  history = [];
+  resetGame();
+  updateStatus();
+  updateUndoState();
+};
+
+const undoPoint = function () {
+  if (history.length === 0) return;
+
+  if (pendingResetTimeout) {
+    clearTimeout(pendingResetTimeout);
+    pendingResetTimeout = null;
+  }
+
+  const prev = history.pop();
+  scoreAIdx = prev.scoreAIdx;
+  scoreBIdx = prev.scoreBIdx;
+  advantage = prev.advantage;
+  gamesA = prev.gamesA;
+  gamesB = prev.gamesB;
+  setsA = prev.setsA;
+  setsB = prev.setsB;
+  matchOver = prev.matchOver;
+
+  pointA2.classList.remove("filled");
+  pointB2.classList.remove("filled");
+  zoneAEl.classList.remove("zoneWinner");
+  zoneBEl.classList.remove("zoneWinner");
+  winMessageEl.classList.remove("visible");
+
+  updateDisplay();
+  updateStatus();
+  updateUndoState();
+};
+
+btnUndoEl.addEventListener("click", undoPoint);
+updateUndoState();
+
+document
+  .getElementById("btnNew")
+  .addEventListener("click", () => switchScreens("setupScreen"));
 
 zoneAEl.addEventListener("click", () => scorePoint("A"));
 zoneBEl.addEventListener("click", () => scorePoint("B"));
