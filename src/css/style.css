@@ -334,6 +334,9 @@ input[type="text"]:focus {
   transition: background 0.15s ease;
   min-height: 30vh;
 }
+.scoreZoneA {
+  flex-direction: column-reverse;
+}
 .scoreZone:active {
   background: rgba(22, 55, 75, 0.6);
 }

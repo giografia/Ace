@@ -181,6 +181,7 @@ const scorePoint = function (team) {
       updateDisplay();
     } else {
       matchState.advantage = team;
+      updateDisplay();
     }
     return;
   }
